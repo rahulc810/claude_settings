@@ -3,6 +3,7 @@ name: query-db
 description: Inspect or query the SQLite databases under ~/databases (erp.db, solar.db, network.db, deebot, bridge). Use before any SELECT/UPDATE against a project database, and when hitting "no such column", "no such table", or an empty result you did not expect.
 allowed-tools: Bash, Read, Grep
 argument-hint: "target: local | server (default: local)"
+model: claude-sonnet-5
 ---
 
 # Querying the project databases

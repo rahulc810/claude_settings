@@ -2,6 +2,7 @@
 name: prototype-ui
 description: Build 2-4 visual variants of a UI to decide what something should look like, viewable together for direct comparison. Use when unsure how a component or screen should look, or choosing between layout/design approaches. For non-visual questions (state, logic, data flow), use /prototype instead.
 allowed-tools: Write, Bash
+model: claude-sonnet-5
 ---
 
 # Prototype UI

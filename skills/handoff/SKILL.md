@@ -4,6 +4,7 @@ description: Compact the current conversation into a handoff brief on the mcp-br
 argument-hint: "(optional) what the next session will focus on"
 disable-model-invocation: true
 allowed-tools: mcp__brief-local__get_brief, mcp__brief-local__list_briefs, mcp__brief-local__send_brief, mcp__brief-local__complete_brief
+model: claude-sonnet-5
 ---
 Compact the current conversation into a handoff brief and submit it to the mcp-brief MCP server so a fresh session can continue the work.
 

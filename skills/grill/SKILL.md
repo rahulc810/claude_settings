@@ -2,6 +2,7 @@
 name: grill
 description: Grill the user relentlessly about a plan, decision, or idea to stress-test their thinking. Use when the user wants their reasoning pressure-tested, or uses any 'grill' trigger phrases.
 disable-model-invocation: true
+model: claude-sonnet-5
 ---
 
 Stress-test the user's plan, decision, or idea by attacking its weakest points. Your job is to find holes, not to help build — that comes later, if at all.

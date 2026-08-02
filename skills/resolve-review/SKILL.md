@@ -71,5 +71,5 @@ silently ignoring it or arguing it away.
   recurring pattern).
 - Don't reduce a Blocking or Should-fix finding's severity to make it easier to skip.
 - If more than a couple of findings turn out to need real design decisions rather than
-  straightforward fixes, stop and flag that the report may need `/planit` rather than
+  straightforward fixes, stop and flag that the report may need `/designit` rather than
   direct patching — don't improvise architecture mid-fix.

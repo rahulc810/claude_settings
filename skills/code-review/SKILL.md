@@ -24,7 +24,7 @@ mcp-erp tasks.
 
 - `project` resolves to a path on disk. Accept a path directly, or a name — if a name,
   look under the common project roots and ask once rather than guessing.
-- Plan docs live at `docs/plans/<plan-name>.md` (the output of `/planit` → `/plan-doc`).
+- Plan docs live at `docs/plans/<plan-name>.md` (the output of `/designit` → `/plan-doc`).
   If that path doesn't exist, search the project before asking.
 
 ## Arguments

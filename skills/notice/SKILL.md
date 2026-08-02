@@ -2,6 +2,7 @@
 name: notice
 description: Note a recurring friction, correction, or workflow pattern during work, for later review as a possible new or improved skill. Use when a correction, repeated workaround, or "I always do it this way" moment comes up mid-task.
 allowed-tools: Read, Edit
+model: claude-sonnet-5
 ---
 
 # Notice
@@ -26,7 +27,7 @@ Keep it to one line. No status field, no numbering, no format beyond that — th
 
 Periodically — whenever you're touching skills anyway, no fixed schedule — skim the file. For each note, decide by hand:
 
-- Recurred more than once, or generalizes cleanly → worth a skill change. Make it directly, or run `/planit` first if it needs real design.
+- Recurred more than once, or generalizes cleanly → worth a skill change. Make it directly, or run `/designit` first if it needs real design.
 - One-off, or already covered → delete the line.
 
 Clear out actioned or dead lines as you go. The file should stay short enough to read in one pass.

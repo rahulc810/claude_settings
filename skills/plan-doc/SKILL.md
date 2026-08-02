@@ -16,7 +16,7 @@ kept forever. Status is tracked in the index table — never by renaming or dele
 
 ## When to use this
 
-- After `/planit` finalizes, to put the agreed plan on disk.
+- After `/designit` finalizes, to put the agreed plan on disk.
 - On its own before `ExitPlanMode`, for anything bigger than a single edit.
 - Skip for a one-file change nobody needs to re-read in six months.
 

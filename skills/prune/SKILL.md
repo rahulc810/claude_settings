@@ -3,6 +3,7 @@ name: prune
 description: Condense the repo's markdown docs back to their conventions — compress the ledger, archive old plans, delete outdated content. Use for periodic housekeeping when the docs have crept.
 disable-model-invocation: true
 allowed-tools: Read, Edit, Bash
+model: claude-sonnet-4-6
 ---
 
 # Prune

@@ -3,6 +3,7 @@ name: resume
 description: Resume from a handoff brief on the mcp-brief server. Use at the start of a session to continue prior work from Claude web or Claude Code.
 disable-model-invocation: true
 allowed-tools: mcp__brief-local__get_brief, mcp__brief-local__list_briefs, mcp__brief-local__send_brief, mcp__brief-local__complete_brief
+model: claude-sonnet-5
 ---
 Continue prior work from a handoff brief on the mcp-brief MCP server.
 

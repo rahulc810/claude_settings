@@ -2,6 +2,7 @@
 name: prototype
 description: Build a small throwaway script to answer one concrete design or logic question before committing to an implementation. Use when unsure whether an approach will work, when a state/data flow is hard to reason about on paper, or when comparing two implementation options.
 allowed-tools: Write, Bash
+model: claude-sonnet-5
 ---
 
 # Prototype

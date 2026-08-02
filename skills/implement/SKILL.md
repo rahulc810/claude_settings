@@ -3,6 +3,7 @@ name: implement
 description: "Implement a docs/plans/ plan end to end, then hand off to land-feature. Use when a docs/plans/NNN-*.md plan exists with status authored and is ready to build."
 disable-model-invocation: true
 argument-hint: "target-project/module"
+model: claude-sonnet-5
 ---
 
 # Implement a plan

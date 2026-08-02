@@ -1,6 +1,7 @@
 ---
 name: teachme
 description: Run a closing concept-retro at the end of substantive Claude Code sessions to catch concept-gaps before they become invisible black boxes. Trigger automatically near the end of any session where you introduced a protocol, library, architecture pattern, or tool the user hadn't specified or clearly already known — even if the user doesn't ask for it. Do NOT trigger for sessions that were pure syntax lookups, small tweaks, or used only concepts already logged in concepts.md. If unsure whether a session was "substantive," lean toward running it — a skipped trivial retro costs nothing, a missed real one lets a black box slip through.
+model: claude-sonnet-4-6
 ---
 
 # Concept Retro

@@ -1,11 +1,11 @@
 ---
-name: planit
-description: Iteratively drill a feature, idea or requirement into a locked plan, then hand it to /plan-doc. Use when something needs designing and deciding before any code is written.
+name: designit 
+description: Iteratively drill a feature, idea or requirement into a locked high level design, then hand it to /plan-doc. Use when something needs designing and deciding before any code is written.
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
-# Planit
+# Designit
 
 Starts from a single high-level plan and progressively zooms in, one round at a time,
 until the details are locked. **No coding** — the output is a decision, not an

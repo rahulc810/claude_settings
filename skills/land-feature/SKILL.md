@@ -2,6 +2,7 @@
 name: land-feature
 description: Close out landed work — append the docs/COMPLETE_ACTIONS.md entry, reconcile CLAUDE.md invariants, update README.md and docs/plans/README.md status. Use when work is finished and the user says "done", "ship it", "land this", "log this", "wrap up", or asks for a COMPLETE_ACTIONS entry.
 allowed-tools: Read, Edit, Write, Bash, Grep
+model: claude-sonnet-4-6
 ---
 
 # Landing a feature
