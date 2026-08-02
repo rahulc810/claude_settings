@@ -1,4 +1,11 @@
 {
+  "model": "opus",
+  "effortLevel": "medium",
+  "theme": "auto",
+  "switchModelsOnFlag": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
   "permissions": {
     "allow": [
       "Bash(DEEBOT_DB_DIR=__CMDSUB_OUTPUT__ python -c ' *)",

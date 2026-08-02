@@ -14,7 +14,7 @@ When something recurs — a correction you give more than once, a workaround you
 
 ## How
 
-Append a line to `docs/notice.md` 
+Append a line to `~/Documents/code/claude_settings/docs/notice.md` 
 
 ```
 - <date>: <what happened> → <what it might mean for a skill>
