@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__brief-local__get_brief",
+      "mcp__brief-local__list_briefs",
+      "mcp__brief-local__send_brief",
+      "mcp__brief-local__complete_brief",
+      "mcp__claude_ai_mcp-brief__send_brief",
+
+      "Skill(plan-doc)",
+      "Skill(plan-doc:*)",
+      "Skill(query-db)",
+      "Skill(query-db:*)",
+      "Skill(land-feature)",
+      "Skill(land-feature:*)",
+      "Skill(notice)",
+      "Skill(notice:*)",
+
+      "Read(//tmp/**)",
+      "Read(//home/rahul/.claude/skills/**)",
+
+      "Bash(.venv/bin/python -m pytest*)",
+      "Bash(timeout * .venv/bin/python -m pytest*)",
+      "Bash(python -m pytest*)",
+      "Bash(.venv/bin/python -c ' *)",
+      "Bash(.venv/bin/pip show *)",
+
+      "Bash(git -C * status*)",
+      "Bash(git -C * diff*)",
+      "Bash(git -C * branch*)",
+      "Bash(git -C * remote*)",
+      "Bash(git add *)",
+      "Bash(git stash *)",
+      "Bash(git push *)",
+
+      "Bash(cat)",
+      "Bash(mktemp -d)",
+      "Bash(systemd-analyze verify *)",
+      "Bash(sudo -n nft -c -f deploy/nftables-deebot.nft)",
+
+      "Bash(HVAC_DEMO=1 .venv/bin/python main.py)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8002/hvac)",
+
+      "Bash(ping -c * *)",
+      "Bash(arping *)",
+      "Bash(sudo arping *)"
+    ]
+  },
+  "disableWorkflows": true,
+  "disableArtifact": true
+}
