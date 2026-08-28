@@ -1,13 +1,14 @@
 ---
 name: notice
-description: Note a recurring friction, correction, or workflow pattern during work, for later review as a possible new or improved skill. Use when a correction, repeated workaround, or "I always do it this way" moment comes up mid-task.
+description: Note a recurring friction, correction, or workflow pattern during work, for later review as a possible new or improved skill. Trigger on:- notice, log this friction, that's the second time, I always do it this way.
 allowed-tools: Read, Edit
 model: claude-sonnet-5
 ---
 
 # Notice
 
-Most skill improvements come from noticing friction during real work, not from sitting down to write a skill in isolation. This captures that noticing, cheaply, without turning it into process.
+Runs continuously alongside every other skill, not at a pipeline stage
+(`.specify/memory/constitution.md`). Most skill improvements come from noticing friction during real work, not from sitting down to write a skill in isolation. This captures that noticing, cheaply, without turning it into process.
 
 ## When to use this
 

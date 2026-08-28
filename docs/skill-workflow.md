@@ -1,56 +1,77 @@
 # Skills workflow
 
 A map, not a skill. Nothing here fires automatically — each step is invoked by hand.
+The always-on rules and status vocabularies live in `.specify/memory/constitution.md`;
+this file is the human-facing map on top of it.
+
+## Two invariants
+
+1. **No skill calls another.** You decide when to move from one step to the next — later,
+   an orchestrator may, but nothing else.
+2. **Files are canonical.** Each step hands off by leaving an artifact at a known path
+   with a ready `status:`; the next step reads it. No wrapper, no ledger of pipeline state.
+
+## The pipeline
 
 ```
-grillme          → Discovery
-/notice          → capture friction as it happens, during any work
-   ↓ (reviewed by hand, no fixed schedule)
-/planit           → drill a feature/idea into a locked plan (redo / confirm and continue / confirm and finalize)
-   ↓ (only after "confirm and finalize")
-/plan-doc         → write the locked plan to docs/plans/NNN-slug.md + index row
-   ↓ (build happens)
-/implement        →  implement the plans one by one
-   ↓ (plan implemented)
-/code-review      → findings → docs/reviews/<report>.md, Status: open
+grill            → pressure-test the idea first (no artifact)
+crawl            → CODEBASE.md                          (orient)
+   ↓
+designit         → specs/NNN-<slug>/spec.md      status: accepted
+   ↓
+plan-doc         → specs/NNN-<slug>/plan.md       status: authored   + row in specs/README.md
+   ↓
+implement        → code + tests, one step at a time
+   ↓
+code-review      → specs/NNN-<slug>/review.md     status: open
    ↕ (loop until closed)
-/resolve-review   → fixes the findings, Status: worked-on
-   ↓ (/code-review running-review → Status: closed)
-/land-feature     →  update completed actions
+resolve-review   → fixes, review.md               status: worked-on
+   ↓ (code-review running-review → status: closed)
+finalize         → done-checks, version, commit; flips plan row to implemented
 ```
 
-The review loop is a handshake on the report's `Status:` field — `open` (findings
-outstanding, written by `/code-review`) → `worked-on` (fixes applied, written by
-`/resolve-review`) → `closed` (re-checked clean, written by `/code-review`, terminal).
-Neither skill writes the other's status, and only `closed` forwards to `/land-feature`.
+Human decision points (designit rounds, plan-doc review gate, implement ambiguity) use
+the constitution's **gate protocol**: write `specs/NNN-<slug>/gates/NNN-<gate>.md`,
+`status: awaiting-input`, stop; resume on `status: answered`.
+
+`notice` runs continuously alongside all of the above. `diagnose`, `prototype`,
+`improve` are reached for mid-work, off the chain.
+
+## Core
+
+The portable unit — identical on every machine. Copying `.specify/` + the 12 core
+`skills/` dirs + the authoring-standard section of `skills/README.md` to another machine
+yields a working pipeline with no edits.
+
+`crawl` · `designit` · `plan-doc` · `implement` · `code-review` · `resolve-review` ·
+`finalize` · `diagnose` · `improve` · `prototype` · `grill` · `notice`
+
+## Overlay
+
+This setup's domain — devkit / erp / brief-mcp. Not portable; a partner's pipeline
+carries its own overlay (or none).
+
+`land-feature` (devkit ledger over `finalize`) · `devkit-api-change` · `query-db` ·
+`handoff` · `resume` · agents `consumer-impact` · `ledger` · `verifier`
 
 ## Utility
-```
-/handoff          → Hands off the session via brief-mcp
-/resume           → Resumes the handedoff session via brief-mcp
 
-/prune            → condense *.md logs; git is the real archive
-/diagnose         → discipline to reach for when something breaks (not a step, a stance)
+General, off the linear pipeline.
 
-/prototype        → throwaway script to answer one design/logic question, if needed mid-build
-/prototype-ui     → throwaway UI variants to answer a look-and-feel question, if needed mid-build
-   ↓ (landed)
+`prune` (docs + skill-registry housekeeping) · `prototype-ui` · `postmortem` ·
+`teachme` · `tldr` · `yt-notes` · `yt-tldr` · agent `skeptic`
 
-/query-db
-```
+## When each fires
 
-
-
-## When each one fires
-
-- **`/notice`** — no trigger, just habit. Something recurs → one line in `~/Documents/code/claude_settings/docs/notice.md`.
-- **`/planit`** — explicit only (`disable-model-invocation: true`). You call it when a feature/idea needs drilling into before building.
-- **`/plan-doc`** — fires after `planit` finalizes, or on its own before `ExitPlanMode` for anything bigger than a single edit.
-- **`/diagnose`** — not really "called." It's the standard to hold yourself to whenever debugging, described not scripted.
-- **`/prototype` / `/prototype-ui`** — reach for either mid-build, whenever a question needs proving before committing to an approach. Independent of the plan/build chain — can happen anytime.
-- **`/code-review` / `/resolve-review`** — explicit only, after a build and before landing. `/code-review` reports and never fixes; `/resolve-review` fixes and never closes. For architecture with no diff in hand it's `/improve` instead; to apply routine cleanups directly it's the built-in `/simplify`.
-- **`/prune`** — periodic housekeeping on the markdown logs. Not gated on anything else finishing.
-
-## Not automated, on purpose
-
-No skill here calls another. You decide when to move from one to the next — that's deliberate, so the sequence stays something you actually know, not something a wrapper does for you.
+- **`grill`** — explicit, before `designit`, when reasoning needs pressure-testing.
+- **`designit`** — explicit, when a feature/idea needs drilling before building.
+- **`plan-doc`** — after `designit` finalizes, or on its own before `ExitPlanMode` for
+  anything bigger than a single edit.
+- **`implement`** — when a `specs/*/plan.md` is `authored`.
+- **`code-review` / `resolve-review`** — after a build, before landing. `code-review`
+  reports and never fixes; `resolve-review` fixes and never closes.
+- **`finalize`** — when the review thread is `closed`. `land-feature` is its devkit overlay.
+- **`diagnose`** — the stance to hold whenever debugging; not a step.
+- **`prototype` / `prototype-ui`** — mid-build, to prove an approach before committing.
+- **`prune`** — periodic housekeeping on docs and the skill registry.
+- **`notice`** — no trigger, just habit.

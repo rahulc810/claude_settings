@@ -1,6 +1,6 @@
 ---
-name: designit 
-description: Iteratively drill a feature, idea or requirement into a locked high level design, then hand it to /plan-doc. Use when something needs designing and deciding before any code is written.
+name: designit
+description: Iteratively drill a feature, idea or requirement into a locked spec, then hand it to /plan-doc. Trigger on:- designit, design this, brainstorm, design doc, architecture for, how should we build, what's the approach.
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model: claude-opus-4-8
@@ -18,35 +18,41 @@ implementation.
 - Skip for a change you could describe fully in one sentence — go straight to the edit,
   or to `/plan-doc` if it still deserves a record.
 
-## Steps
+## Procedure
 
-1. **State your assumptions upfront**, and ask clarifying questions rather than guessing
-   at anything that would change the design.
-2. **Draft the plan at one level of detail**, then present it and stop. The user decides:
-   **redo** / **confirm and continue** (zoom in one level) / **confirm and finalize**.
-3. **Repeat** until all "Critical/Major" decisions are decided or user commands "confirm and finalize". Each round should add real resolution —
-   structure, architecture, module boundaries, libraries, the decisions and their
-   reasons — not restate the last one.
-4. **Hand the finalized plan to `/plan-doc`**, which writes it to `docs/plans/NNN-slug.md`
-   and indexes it. Only after "confirm and finalize".
+1. **Read `.specify/memory/constitution.md`.**
 
-## The finalized plan must carry
+2. **State your assumptions upfront**, and ask clarifying questions rather than guessing
+   at anything that would change the design. Read the codebase to ground them — do not
+   guess the tech stack.
 
-This is exactly what `/plan-doc` writes to disk — produce it in that shape so the handoff
-is a copy, not a rewrite:
+3. **Draft the design at one level of detail**, then present it and stop. This is a
+   human gate (interactive — answered in-session per the constitution's gate protocol).
+   The user decides: **redo** / **confirm and continue** (zoom in one level) / **confirm
+   and finalize**.
 
-- **Context** — why the work exists, what is currently true, and the invariant or
-  constraint that forced the design.
-- **Decisions** — the choices that were actually contested, each with the reason it went
-  that way.
-- **Steps** — each with **Files** (what it touches), **Do** (the change, precisely enough
-  to execute without re-deriving it) and **Verify** (the command, and the result that
-  means success).
-- **Out of scope** — what was deliberately left out, so it isn't re-litigated mid-build.
+4. **Repeat** until every Critical/Major decision is settled or the user says "confirm
+   and finalize". Each round adds real resolution — structure, boundaries, libraries,
+   the decisions and their reasons — never a restatement of the last.
+
+5. **On finalize, write the spec** to `specs/NNN-<slug>/spec.md` from
+   `.specify/templates/spec-template.md`, `status: accepted`. Take `NNN` from the
+   `specs/` index. Then hand off: `/plan-doc` reads this spec and writes the plan.
+
+## The spec must carry
+
+Produce it in the template's shape so the write is a copy, not a rewrite:
+
+- **Problem** — why the work exists, what is currently true, the constraint that forced
+  the design.
+- **Considered Approaches** and the **Decision** with its reason — the choices that were
+  actually contested.
+- **Design** — enough detail to plan against without re-deriving it.
+- **Non-Goals** — what was deliberately left out, so it isn't re-litigated mid-build.
 
 ## What not to do
 
 - Don't write code, and don't edit the target files "to check" — read only.
-- Don't advance a round without the user's explicit word; "looks good" on one level isn't
-  approval of the next.
-- Don't leave a Step whose Verify can't actually be run.
+- Don't advance a round without the user's explicit word; "looks good" on one level
+  isn't approval of the next.
+- Don't leave a decision whose consequences you haven't drilled into.

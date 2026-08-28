@@ -13,4 +13,4 @@ table below only, never by renaming or deleting a file.
 
 | # | Title | Status | Notes |
 |---|-------|--------|-------|
-| 001 | Skill-Pipeline Framework | authored | Spine for the shared skill pipeline; orchestrator is a separate later phase |
+| 001 | Skill-Pipeline Framework | implemented | Spine for the shared skill pipeline; orchestrator is a separate later phase |

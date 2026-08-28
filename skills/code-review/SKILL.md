@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review a diff or a plan's implementation for correctness, quality and plan adherence, writing findings bucketed by severity to a docs/reviews/ report. Use when asked to review, audit or check work — especially before landing or merging, or to verify an implementation matches its plan.
+description: Review a diff or a plan's implementation for correctness, quality and plan adherence, bucketing findings by severity into specs/NNN-<slug>/review.md. Trigger on:- review this, check my code, does this match the plan, audit, running-review.
 argument-hint: "project (path or name), scope: full | plan <plan-name...> | running-review [report]"
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 disable-model-invocation: true
@@ -25,15 +25,18 @@ mcp-erp tasks.
 
 - `project` resolves to a path on disk. Accept a path directly, or a name — if a name,
   look under the common project roots and ask once rather than guessing.
-- Plan docs live at `docs/plans/<plan-name>.md` (the output of `/designit` → `/plan-doc`).
+- Plans live at `specs/NNN-<slug>/plan.md` (the output of `/designit` → `/plan-doc`).
   If that path doesn't exist, search the project before asking.
+
+Read `.specify/memory/constitution.md` first — it holds the pipeline map and the review
+status vocabulary (`open` → `worked-on` → `closed`).
 
 ## Arguments
 
 - `project` — path or name of the project to review.
 - `scope` — if omitted, ask. Don't default silently between "everything", "one plan" and
   "re-check fixes".
-  - `full` — the whole codebase, cross-checked against every plan doc in `docs/plans/`.
+  - `full` — the whole codebase, cross-checked against every `specs/*/plan.md`.
   - `plan <name...>` — only the code the named plan(s) describe.
   - `running-review [report]` — re-check fixes against an existing report. If `report` is
     omitted, take the most recent one with `Status: worked-on`; if none exists, say so and
@@ -41,14 +44,11 @@ mcp-erp tasks.
 
 ## Status lifecycle
 
-A review thread lives in **one file for its whole life**, reused across rounds rather
-than recreated. The `Status:` field at the top drives the handoff with `resolve-review`:
-
-| Status | Means | Written by |
-|---|---|---|
-| `open` | findings outstanding — first pass, or a re-check that still found Blocking/Should-fix | this skill |
-| `worked-on` | fixes applied, awaiting re-review | `resolve-review` only |
-| `closed` | no Blocking or Should-fix remain; terminal, forward to `/land-feature` | this skill |
+A review thread lives in **one file for its whole life** (`specs/NNN-<slug>/review.md`),
+reused across rounds rather than recreated. The `status:` header drives the handoff with
+`resolve-review`; the vocabulary and who-writes-what is in the constitution. In short:
+this skill writes `open` and (terminal) `closed`; `resolve-review` writes `worked-on`;
+`closed` forwards to `finalize`.
 
 ## Steps
 
@@ -57,8 +57,8 @@ than recreated. The `Status:` field at the top drives the handoff with `resolve-
    files directly.
 
 2. **Load context for the scope.**
-   - `full` — `Glob` every plan doc under `docs/plans/`, read each, then survey the
-     codebase (structure via `Glob`/`Grep`, key files via `Read`).
+   - `full` — `Glob` every `specs/*/plan.md`, read each, then survey the codebase
+     (structure via `Glob`/`Grep`, key files via `Read`).
    - `plan <name...>` — read the plan doc(s) in full *first*: decisions, architecture,
      locked-in details. Then find the code, preferring `git log`/`git diff` against the
      base branch; fall back to `Grep`/`Glob` for the files the plan names.
@@ -81,16 +81,16 @@ than recreated. The `Status:` field at the top drives the handoff with `resolve-
    (style, naming, preference). Don't inflate severity to look thorough, and don't bury
    real issues under nits.
 
-5. **Write or update the report** at `docs/reviews/<project>-<date>[-<plan-name>].md` —
-   created once per thread; `running-review` edits it in place.
-   - `Status:` (see the table above), scope and creation date at the top, then a summary
-     of counts by severity.
+5. **Write or update the report** at `specs/NNN-<slug>/review.md` (from
+   `.specify/templates/review-template.md`) — created once per thread; `running-review`
+   edits it in place.
+   - `status:` + `updated:` header, scope at the top, then a summary of counts by severity.
    - Findings grouped by severity, each with file:line, what's wrong, why it matters, and
      a suggested fix.
    - `running-review` appends a `## Re-review — <date>` section listing which prior
      findings are confirmed resolved and which remain — it doesn't rewrite history.
-   - Set `Status: closed` if no Blocking or Should-fix remain and forward to
-     `/land-feature`; otherwise `open`.
+   - Set `status: closed` if no Blocking or Should-fix remain and forward to `/finalize`;
+     otherwise `open`.
    - Give a concise inline summary in chat too: the counts, then the Blocking items in
      full. Don't just say "see the report."
 

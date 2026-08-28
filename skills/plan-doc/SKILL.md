@@ -1,19 +1,16 @@
 ---
 name: plan-doc
-description: Write or update a numbered plan in docs/plans/ and its index row. Use when the user asks to plan, design or spec work before building it, before calling ExitPlanMode on anything larger than a single edit, and when a plan's status changes to implemented, superseded or abandoned.
+description: Translate a spec into a numbered, deterministic implementation plan under specs/. Trigger on:- plan this, write a plan, implementation plan, plan-doc, plan from spec, step-by-step plan.
+argument-hint: "Path to the spec, or a feature description if no spec exists"
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 model: claude-opus-5
 ---
 
 # Plan doc
 
-Writes a locked plan to `docs/plans/NNN-slug.md` and indexes it. `docs/plans/README.md`
-sets the rules: numbered, append-only, written **before** the work, and the number is
-kept forever. Status is tracked in the index table — never by renaming or deleting a file.
-
-> **Orient first:** read the target repo's `CLAUDE.md` and its `docs/plans/README.md`
-> header — they govern this repo's doc set, invariants and plan-status vocabulary, not
-> devkit's.
+Turns a spec (or raw feature description) into a numbered plan detailed enough that a
+junior model executes every step without re-deriving anything. Output is **deterministic**:
+no vague verbs, no missing file paths, no Verify step without an expected result.
 
 ## When to use this
 
@@ -21,61 +18,39 @@ kept forever. Status is tracked in the index table — never by renaming or dele
 - On its own before `ExitPlanMode`, for anything bigger than a single edit.
 - Skip for a one-file change nobody needs to re-read in six months.
 
-## Steps
+## Procedure
 
-1. **Take the next number from the index, not from `ls`** — an abandoned plan still owns
-   its number. `NNN-short-slug.md`, zero-padded, never reused.
+1. **Read `.specify/memory/constitution.md`**, then the spec if one exists
+   (`specs/NNN-<slug>/spec.md` with `status: accepted`, or the argument path).
 
-   ```bash
-   cat docs/plans/README.md
-   ls docs/plans/
-   ```
+2. **Take the plan number from the `specs/` index (`specs/README.md`), not from `ls`** —
+   an abandoned plan keeps its number. The plan is `specs/NNN-<slug>/plan.md`, written
+   from `.specify/templates/plan-template.md`, `status: authored`.
 
-2. **Write the plan in the Files → Do → Verify shape.** Each step names the files it
-   touches, the change, and how you will know it worked. This is the style already used
-   across these repos; keep it.
+3. **Read the source files the plan will touch** — entry points, interfaces, tests —
+   before describing any change to them. Never write a change against a file you haven't
+   read.
 
-   ```markdown
-   # Plan NNN — <title>
+4. **Write the plan** in the template's Context → Decisions → Out of Scope → Steps shape.
+   Each step:
+   - **One concern.** Not "add the model + wire the route + write tests" in one step.
+   - **Files are exact paths.** Read the codebase first.
+   - **Do names the function, signature, types, exact behaviour**, any constants introduced.
+   - **Verify is a runnable command with an expected result.** `pytest -q …` → `1 passed`,
+     not "tests should pass".
+   - **Dependencies explicit** — if step 3 needs step 2's output, say so.
 
-   ## Context
-   Why this work exists and what is currently true. Name the invariant or constraint that
-   forced the design, not just the feature request.
+5. **Review gate.** Present the full plan text (not a summary) and ask *"Does this look
+   right? Reply yes to keep it, or describe what to change."* Interactive gate per the
+   constitution — the plan is already on disk, so a revision is an edit. Don't proceed
+   to index it until confirmed.
 
-   ## Decisions
-   The choices that were actually contested, each with the reason it went that way. A
-   reader six months from now needs the *why*, which the code will not carry.
-
-   ## Steps
-
-   ### 1. <imperative title>
-   **Files:** `src/...`, `tests/test_....py`
-   **Do:** the change, precisely enough to execute without re-deriving it.
-   **Verify:** the command to run and the result that means success.
-
-   ### 2. ...
-
-   ## Out of scope
-   What was deliberately left out, so it does not get re-litigated mid-build.
-   ```
-
-3. **Index it in the same change.** Add the row to the table in `docs/plans/README.md` —
-   a plan file without an index row does not exist.
-
-   | Status | Means |
-   |---|---|
-   | **authored** | written, not started |
-   | **implemented** | landed — and there is a matching `docs/COMPLETE_ACTIONS.md` entry |
-   | **superseded** | replaced — name the successor plan in the row |
-   | **abandoned** | say why, in the row |
-
-4. **Present it for approval *after* it's on disk**, referencing the file path. Plans here
-   go through several rounds before approval; on disk, a revision is an edit rather than a
-   rewrite from scratch.
+6. **Index it** in `specs/README.md` — a plan without an index row does not exist. Status
+   vocabulary is in the constitution.
 
 ## What not to do
 
-- Don't flip a row to **implemented** yourself — that's `land-feature`'s job, so the
-  status and the ledger entry it claims exists land together.
-- Don't renumber, rename or delete a plan file to reflect a status change.
-- Don't write a plan whose Verify lines can't actually be run.
+- Never flip a row to `implemented` — that's `finalize`'s job, so the status and the
+  ledger entry land together.
+- Never renumber, rename or delete a plan file to reflect a status change.
+- Never write a Verify line that can't actually be run.

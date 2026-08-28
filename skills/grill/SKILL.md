@@ -1,11 +1,11 @@
 ---
 name: grill
-description: Grill the user relentlessly about a plan, decision, or idea to stress-test their thinking. Use when the user wants their reasoning pressure-tested, or uses any 'grill' trigger phrases.
+description: Grill the user relentlessly about a plan, decision, or idea to stress-test their thinking. Trigger on:- grill, grill me, pressure-test this, poke holes, stress-test my reasoning.
 disable-model-invocation: true
 model: claude-sonnet-5
 ---
 
-Stress-test the user's plan, decision, or idea by attacking its weakest points. Your job is to find holes, not to help build — that comes later, if at all.
+Stress-test the user's plan, decision, or idea by attacking its weakest points. Your job is to find holes, not to help build — that comes later, if at all. Runs before `/designit` in the pipeline (`.specify/memory/constitution.md`); it produces no artifact.
 
 ## Calibrate first
 Open by asking one question: how hard do they want it, 1–5.

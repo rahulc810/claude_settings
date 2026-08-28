@@ -1,7 +1,7 @@
 ---
 name: resolve-review
-description: Work through a code-review report's findings and fix them, in priority order, with confirmation on anything non-trivial. Use when asked to address, fix, or resolve review findings, act on a docs/reviews/ report, or clear Blocking items before landing a feature.
-argument-hint: "report (path to docs/reviews/... file), which: all | blocking | should-fix | nit"
+description: Work through a code-review report's findings and fix them in priority order, with confirmation on anything non-trivial. Trigger on:- resolve review, address findings, fix the review, clear blocking items.
+argument-hint: "report (path to specs/NNN-<slug>/review.md), which: all | blocking | should-fix | nit"
 allowed-tools: Read, Edit, Grep, Glob, Bash
 disable-model-invocation: true
 ---
@@ -15,17 +15,19 @@ silently ignoring it or arguing it away.
 
 ## Assumptions (flag if wrong)
 
-- The report is an `open`-status `code-review` output at
-  `docs/reviews/<project>-<date>[-<plan-name>].md`, with findings grouped under
-  **Blocking** / **Should-fix** / **Nit** headers, each with file:line, what's wrong, why
-  it matters, and a suggested fix.
+- The report is an `open`-status `code-review` output at `specs/NNN-<slug>/review.md`,
+  with findings grouped under **Blocking** / **Should-fix** / **Nit** headers, each with
+  file:line, what's wrong, why it matters, and a suggested fix.
 - Fixing scope is limited to what's named in the finding — not an invitation to refactor
   around it.
+
+Read `.specify/memory/constitution.md` first for the pipeline map and the review status
+vocabulary.
 
 ## Arguments
 
 - `report` — path to the review report to work from. If omitted, look for the most
-  recent file in `docs/reviews/` with `open` status and confirm it's the right one before proceeding.
+  recent `specs/*/review.md` with `status: open` and confirm it's the right one before proceeding.
 - `which` — which severity tier(s) to address:
   - `all` (default) — Blocking, then Should-fix, then Nit, in that order.
   - `blocking` / `should-fix` / `nit` — just that tier.
@@ -57,8 +59,8 @@ silently ignoring it or arguing it away.
 5. **Summarize what happened**: fixed / skipped-with-reason / deferred, per item. Don't
    just say "done."
 
-6. **Set the report's `Status:` to `worked-on`.** Never `closed` — only `code-review`
-   closes a thread, after re-checking the fixes.
+6. **Set the report's `status:` to `worked-on`** and bump `updated:`. Never `closed` —
+   only `code-review` closes a thread, after re-checking the fixes.
 
 7. **Offer to re-run `code-review`** on the same scope to confirm the findings are
    actually resolved, rather than trusting this pass's own fixes. Don't run it

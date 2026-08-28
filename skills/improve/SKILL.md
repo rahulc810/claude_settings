@@ -1,9 +1,14 @@
 ---
 name: improve
-description: Scan the code against four architecture checks — layout, isolation, interface strength, extensibility — and propose specific fixes without applying them. Use when a file keeps coming up in changes and feels harder to touch each time, or when asked to review/improve architecture. For a specific diff or plan use /code-review; to apply routine quality cleanups use /simplify.
+description: Scan the code against four architecture checks — layout, isolation, interface strength, extensibility — and propose specific fixes without applying them. Trigger on:- improve, review architecture, find improvements, refactor candidates, what's wrong with this module.
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # Improve Architecture
+
+Off the linear pipeline (`.specify/memory/constitution.md`) — reach for it when a file
+keeps getting harder to touch. For a specific diff or plan use `/code-review`; to apply
+routine cleanups use `/simplify`.
 
 Good code comes down to four things. Check candidates against these, in order — each one tends to cause problems in the ones below it.
 
