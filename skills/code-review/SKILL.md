@@ -4,6 +4,7 @@ description: Review a diff or a plan's implementation for correctness, quality a
 argument-hint: "project (path or name), scope: full | plan <plan-name...> | running-review [report]"
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 disable-model-invocation: true
+model: claude-opus-5
 ---
 
 # Code Review

@@ -65,7 +65,7 @@ one — devkit is only installed in the project venvs.
 ## Target
 
 - `local` (default) — connect to the local DB directly.
-- `server` — connect over SSH (tunnel or remote client). Follow `~/Documents/code/devkit/.claude/policies/ssh-policy.md`:
+- `server` — connect over SSH (tunnel or remote client). Follow `/home/rahul/Documents/code/claude_settings/policies/ssh-policy.md`:
   - **Reads** run freely.
   - **Writes** always confirm first — exact statement, rows/tables affected, reversibility.
   - Prefer a rollback-first check (`BEGIN`, show affected count, then ask before `COMMIT`)

@@ -3,6 +3,7 @@ name: designit
 description: Iteratively drill a feature, idea or requirement into a locked high level design, then hand it to /plan-doc. Use when something needs designing and deciding before any code is written.
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
+model: claude-opus-4-8
 ---
 
 # Designit
@@ -23,7 +24,7 @@ implementation.
    at anything that would change the design.
 2. **Draft the plan at one level of detail**, then present it and stop. The user decides:
    **redo** / **confirm and continue** (zoom in one level) / **confirm and finalize**.
-3. **Repeat** until "confirm and finalize". Each round should add real resolution —
+3. **Repeat** until all "Critical/Major" decisions are decided or user commands "confirm and finalize". Each round should add real resolution —
    structure, architecture, module boundaries, libraries, the decisions and their
    reasons — not restate the last one.
 4. **Hand the finalized plan to `/plan-doc`**, which writes it to `docs/plans/NNN-slug.md`

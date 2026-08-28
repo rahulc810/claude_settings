@@ -2,6 +2,7 @@
 name: plan-doc
 description: Write or update a numbered plan in docs/plans/ and its index row. Use when the user asks to plan, design or spec work before building it, before calling ExitPlanMode on anything larger than a single edit, and when a plan's status changes to implemented, superseded or abandoned.
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
+model: claude-opus-5
 ---
 
 # Plan doc

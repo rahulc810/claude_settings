@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(DEEBOT_DB_DIR=__CMDSUB_OUTPUT__ python -c ' *)",
+      "Bash(python -m pytest -q)",
+      "Edit(/.claude/skills/land-feature/**)",
+      "Edit(/.claude/skills/implement/**)",
+      "Edit(/.claude/skills/planit/**)"
+    ]
+  },
+  "model": "sonnet",
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "theme": "auto",
+  "outputStyle": "Concise",
+  "switchModelsOnFlag": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
+}

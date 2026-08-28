@@ -13,7 +13,7 @@ Before concluding a cause: get direct evidence for it (a log line, an independen
 ## Target
 
 - `local` (default) — investigate on this machine directly.
-- `server` — investigate over SSH. Follow `~/Documents/code/devkit/.claude/policies/ssh-policy.md`: read-only investigation
+- `server` — investigate over SSH. Follow `/home/rahul/Documents/code/claude_settings/policies/ssh-policy.md`: read-only investigation
   only; any fix or change found along the way needs separate confirmation and is out of
   scope for this skill.
 

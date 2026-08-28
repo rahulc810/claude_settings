@@ -20,6 +20,6 @@ Keep it honest. If the fix was luck rather than understanding, say so.
 ## Target
 
 - `local` (default) — pull evidence from this machine.
-- `server` — pull evidence over SSH. Follow `~/Documents/code/devkit/.claude/policies/ssh-policy.md`: read-only throughout.
+- `server` — pull evidence over SSH. Follow `/home/rahul/Documents/code/claude_settings/policies/ssh-policy.md`: read-only throughout.
   A postmortem reconstructs what happened, not remediates it — if a fix suggests itself,
   note it as a follow-up action item rather than performing it.
