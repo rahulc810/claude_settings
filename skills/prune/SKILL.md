@@ -1,6 +1,6 @@
 ---
 name: prune
-description: Condense the repo's markdown docs back to convention and sweep the skill registry for dead entries. Trigger on:- prune, housekeeping, the docs have crept, review the skill registry.
+description: Condense the repo's markdown docs back to convention and sweep the skill registry for dead entries. Trigger on:- prune, housekeeping, the docs have crept, review the skill registry, audit a skill, why isn't my skill triggering.
 disable-model-invocation: true
 allowed-tools: Read, Edit, Bash
 model: claude-sonnet-4-6
@@ -65,7 +65,20 @@ Content in the wrong file gets moved to the right one, not deleted.
    Present the flags. On a confirm-keep, bump that row's `last-reviewed` to today. Delete
    a skill only on explicit confirmation.
 
-6. **Present the proposed actions as a list and get confirmation before touching
+6. **Deep-audit a single skill** — when the run names one `skills/<name>/SKILL.md` rather
+   than the whole registry, additionally check, citing `SKILL.md` line numbers with a
+   severity on each finding:
+   - **Safety** — `allowed-tools` / `tools` wider than the Procedure uses; a destructive
+     or outward-facing action (delete, force-push, send, deploy) with no confirmation
+     step.
+   - **Triggering** — if the complaint is "it doesn't fire", compare its `description`
+     trigger phrases against the request that failed *and* against sibling skills'
+     triggers for a collision that routes elsewhere.
+   - **Standard** — section order, constitution restatement, size smell, per the
+     authoring standard in `skills/README.md`.
+   Report findings; apply fixes only on confirmation, same as the registry sweep.
+
+7. **Present the proposed actions as a list and get confirmation before touching
    anything.** This skill rewrites history-shaped files; it doesn't do that unasked.
   
 

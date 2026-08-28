@@ -65,6 +65,7 @@ pipeline). `last-reviewed` is bumped by `/prune` on a confirm-keep.
 | prototype-ui | utility | throwaway UI variants for a look-and-feel call | utility | 2026-08-28 |
 | prune | utility | condense docs + sweep the skill registry | utility | 2026-08-28 |
 | forge | utility | adversarial idea→skill assessor (fold / add / drop + rating) | utility | 2026-08-29 |
+| bug-echo | utility | after a fix, hunt structural twins of the bug, ranked | utility (post-fix) | 2026-08-29 |
 | teachme | utility | closing concept-retro for a session | utility | 2026-08-28 |
 | tldr | utility | add a glance-readable TLDR to a markdown file | utility | 2026-08-28 |
 | yt-notes | utility | structured notes from a YouTube video | utility | 2026-08-28 |
