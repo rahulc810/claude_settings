@@ -259,3 +259,22 @@ Expected: `ok`.
 - **`settings.json`, hooks, keybindings.**
 - **Deploying to the partner's machine** — this produces the portable core; the copy
   step is theirs.
+
+## Amendment — 2026-08-28 (during review, pre-commit)
+
+Two gaps surfaced reviewing the implemented `constitution.md`:
+
+1. **Linearity.** The `Stage → Skill → Next` table couldn't express a stage with
+   multiple skills, or work flowing backward (e.g. `code-review` finding a design flaw).
+   Fixed: replaced with an **artifact ledger** (Artifact / Producer / Ready-at /
+   Consumed-by), a "the pipeline is a DAG the human walks" rule, and a **Kickback**
+   section (minor = in-place edit + status revert + re-invoke; fundamental = NNN+1
+   `supersedes` NNN). No flow graph — that stays orchestrator-phase scope.
+
+2. **Overlap.** `implement` and `resolve-review` both restated a "work a list one item
+   at a time, Verify each, flag surprises, summarize" loop. Fixed: extracted it to an
+   **Item-execution loop** block in `constitution.md`; both skills now reference it in
+   one line. `/prune`'s registry sweep gains a >40%-shared-instruction consolidation
+   flag (Step 8 already added the sweep; the ratio check is part of it).
+
+Constitution stayed within the ≤ 60-line budget (57).

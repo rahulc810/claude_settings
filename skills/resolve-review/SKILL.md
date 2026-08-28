@@ -37,32 +37,19 @@ vocabulary.
 1. **Read the report.** Parse out findings per severity tier, each with its file:line and
    suggested fix.
 
-2. **Work Blocking items first, one at a time:**
-   - State what you're about to change and why, briefly — a sentence, not a re-explanation
-     of the finding.
-   - Apply the fix.
-   - If the fix isn't as simple as the report suggested (e.g. it touches more than the
-     named lines, or the suggested approach doesn't actually work), stop and explain
-     before proceeding rather than expanding scope silently.
-   - If a finding looks wrong on closer inspection — not actually a bug, or the "fix"
-     would break something else — say so and skip it. Note the disagreement in the
-     summary at the end; don't just quietly leave it unfixed.
+2. **Work the findings via the constitution's Item-execution loop**, in tier order:
+   Blocking, then Should-fix, then Nit (Nit only if `which` includes it). Two
+   review-specific points on top of the loop:
+   - A finding that looks wrong on inspection — not a real bug, or the fix would break
+     something else — is a *skip with reason*, not a silent pass. This skill remediates;
+     it doesn't re-review the other findings.
+   - For Nit, ask once up front — apply all, or list for the user to pick — rather than
+     prompting per item.
 
-3. **Then Should-fix, same pattern.** These are lower-stakes — batch the straightforward
-   ones and note them as you go rather than narrating each one individually, but still
-   flag anything that turns out non-trivial.
-
-4. **Then Nit**, only if `which` includes it. Offer to apply all of them at once (they're
-   non-blocking by definition) or list them for the user to pick from — ask once, up
-   front, rather than per-item.
-
-5. **Summarize what happened**: fixed / skipped-with-reason / deferred, per item. Don't
-   just say "done."
-
-6. **Set the report's `status:` to `worked-on`** and bump `updated:`. Never `closed` —
+3. **Set the report's `status:` to `worked-on`** and bump `updated:`. Never `closed` —
    only `code-review` closes a thread, after re-checking the fixes.
 
-7. **Offer to re-run `code-review`** on the same scope to confirm the findings are
+4. **Offer to re-run `code-review`** on the same scope to confirm the findings are
    actually resolved, rather than trusting this pass's own fixes. Don't run it
    automatically — ask first, since it may not be needed for a `nit`-only pass.
 
