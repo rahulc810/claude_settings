@@ -28,6 +28,14 @@ skills open Procedure with *"Read `.specify/memory/constitution.md`."*
 - Do not restate the constitution's pipeline map or status vocabularies — link to it.
 - ~120 lines is a size smell, not a hard limit. Over it, look for what to cut or split.
 
+### Overlap check
+
+Two skills overlap when a normalized diff of their **Procedure + Constraints** sections
+shares more than ~40% of instruction lines, **or** they take the same input artifact and
+produce the same output artifact. An overlap is a consolidation signal: merge the two,
+or lift the shared discipline into `.specify/memory/constitution.md` and have both
+reference it. `/prune` (registry sweep) and `/forge` (Skeptic pass) both apply this.
+
 ## Registry
 
 `kind`: **core** (portable pipeline, identical on every machine) · **overlay**
@@ -56,6 +64,7 @@ pipeline). `last-reviewed` is bumped by `/prune` on a confirm-keep.
 | postmortem | utility | write an incident postmortem | utility | 2026-08-28 |
 | prototype-ui | utility | throwaway UI variants for a look-and-feel call | utility | 2026-08-28 |
 | prune | utility | condense docs + sweep the skill registry | utility | 2026-08-28 |
+| forge | utility | adversarial idea→skill assessor (fold / add / drop + rating) | utility | 2026-08-29 |
 | teachme | utility | closing concept-retro for a session | utility | 2026-08-28 |
 | tldr | utility | add a glance-readable TLDR to a markdown file | utility | 2026-08-28 |
 | yt-notes | utility | structured notes from a YouTube video | utility | 2026-08-28 |

@@ -28,7 +28,7 @@ Keep it to one line. No status field, no numbering, no format beyond that — th
 
 Periodically — whenever you're touching skills anyway, no fixed schedule — skim the file. For each note, decide by hand:
 
-- Recurred more than once, or generalizes cleanly → worth a skill change. Make it directly, or run `/designit` first if it needs real design.
+- Recurred more than once, or generalizes cleanly → beyond a one-line tweak, copy the note into `docs/skill-ideas/` and run `/forge`, which decides fold / add / drop and rates it. A trivial tweak to an existing skill, just make it.
 - One-off, or already covered → delete the line.
 
 Clear out actioned or dead lines as you go. The file should stay short enough to read in one pass.

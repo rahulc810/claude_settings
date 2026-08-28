@@ -58,8 +58,9 @@ carries its own overlay (or none).
 
 General, off the linear pipeline.
 
-`prune` (docs + skill-registry housekeeping) · `prototype-ui` · `postmortem` ·
-`teachme` · `tldr` · `yt-notes` · `yt-tldr` · agent `skeptic`
+`prune` (docs + skill-registry housekeeping) · `forge` (idea→skill assessor) ·
+`prototype-ui` · `postmortem` · `teachme` · `tldr` · `yt-notes` · `yt-tldr` ·
+agent `skeptic`
 
 ## When each fires
 
@@ -74,4 +75,6 @@ General, off the linear pipeline.
 - **`diagnose`** — the stance to hold whenever debugging; not a step.
 - **`prototype` / `prototype-ui`** — mid-build, to prove an approach before committing.
 - **`prune`** — periodic housekeeping on docs and the skill registry.
+- **`forge`** — explicit, when `docs/skill-ideas/` has accumulated, or pointed at an
+  external skill set to assess it. It is `notice`'s downstream.
 - **`notice`** — no trigger, just habit.

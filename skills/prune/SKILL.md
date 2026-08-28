@@ -59,9 +59,8 @@ Content in the wrong file gets moved to the right one, not deleted.
      `overlay` or `utility` — an orphan;
    - `last-reviewed` older than 90 days — stale, needs a look;
    - over the ~120-line size smell in its `SKILL.md` (`wc -l`);
-   - sharing >40% of its Procedure + Constraints instruction lines with another `core`
-     skill (normalized diff) — flag the pair for consolidation: merge, or extract the
-     shared discipline into `.specify/memory/constitution.md`.
+   - overlapping another `core` skill per the Overlap check in `skills/README.md` — flag
+     the pair for consolidation.
 
    Present the flags. On a confirm-keep, bump that row's `last-reviewed` to today. Delete
    a skill only on explicit confirmation.
