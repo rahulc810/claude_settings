@@ -76,8 +76,8 @@ Five stores. Put each fact in exactly one; cross-reference if it spans two.
 | Store | Put here | Do not put here |
 |---|---|---|
 | **brief** (`brief-local`) | Session continuity only: ending a session with work in flight, or the user says "handoff" / "pause". Include done / next / open questions / key paths. Read via `get_brief` when the user flags a session as a continuation, or on `/resume`. A brief is consumed and `complete_brief`d. | Anything meant to outlive the next session. |
-| **erp tasker** (`erp-local`) | The home-infra domain — erp, vacbat/solar, deebot, network, dnsmasq, HVAC. `create_task` for a concrete follow-up that will not be done this session (a deferred fix, a discovered bug, a chore pushed to later). `create_note` / `append_to_note` for a small project-scoped fact — a config value, a live-box gotcha, a decision. `add_comment` to reply on an existing thread. Check `get_upcoming` / `list_tasks` at the start of home-infra work. | Steps you are about to do now. Generic coding scratch outside the home-infra tree. Long-form reference — that is wiki. |
-| **wiki** (`wiki-local`) | Durable domain knowledge a future session would waste time rediscovering: how a system works, why a design was chosen, a runbook, a non-obvious relationship. `write_doc` / `append_to_doc` for prose, `create_entity` for a system/host/service that needs a stable identity. `search` the wiki before starting non-trivial work on a system. | Transient state, tasks, session logs, half-formed notes. |
+| **erp tasker** (`erp-local`) | **Tasks: any domain.** `create_task` for every concrete follow-up that will not be done this session — a deferred fix, a discovered bug, a chore pushed to later — whatever repo or subject it came from. A todo left in prose only is a todo lost; if it is worth saying "later", it is worth a row. **Notes: the home-infra domain** (erp, vacbat/solar, deebot, network, dnsmasq, HVAC) — `create_note` / `append_to_note` for a small project-scoped fact: a config value, a live-box gotcha, a decision. `add_comment` to reply on an existing thread. Check `get_upcoming` / `list_tasks` at the start of home-infra work. | Steps you are about to do now. Long-form reference — that is wiki. |
+| **wiki** (`wiki-local`) | Durable domain knowledge a future session would waste time rediscovering: how a system works, why a design was chosen, a runbook, a non-obvious relationship. `write_doc` / `append_to_doc` for prose, `create_entity` for a system/host/service that needs a stable identity. `search` the wiki before starting non-trivial work on a system. **Propose the write at the moment the fact is established** — name the title and the gist in one line and get an explicit yes before writing. Never write silently, and do not batch the proposal to session end. | Transient state, tasks, session logs, half-formed notes. |
 | **file memory** (`~/.claude/projects/*/memory/`) | How to work with this user: preferences, corrections, standing guidance, project context not in the code. See the memory instructions in the system prompt. | Domain facts about the systems — that is wiki. |
 | **`docs/notice.md`** (this repo) | Recurring skill friction, workarounds, "I always do it this way" moments — raw material for a future skill change. | Anything actionable now. |
 
@@ -88,6 +88,12 @@ Tie-breakers:
   file memory. About a skill → `notice.md`.
 - If it is both a task and a reference, make the erp task and the wiki doc, and
   link each to the other.
+- Getting information back *out* is `/resume` — it sweeps all four stores,
+  dedupes and ranks. It is explicitly invoked, not automatic: the sweep costs a
+  round-trip per store, so it does not run on every session. Offer it in one
+  line when the user opens on a system with known history, or gives a
+  continuation cue ("continue", "pick up", "what did we do about X"), and let
+  them say yes or wave it off.
 - Use the `*-local` servers. The `claude_ai_*` entries are the same tools over
   the hosted connector — only reach for them if the local one is down.
 - `wiki-local` may be failing to connect. If so, report that so it can be

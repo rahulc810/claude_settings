@@ -60,12 +60,13 @@ pipeline). `last-reviewed` is bumped by `/prune` on a confirm-keep.
 | devkit-api-change | overlay | trace consumers before a devkit signature change | overlay | 2026-08-28 |
 | query-db | overlay | inspect the `~/databases` SQLite stores | overlay | 2026-08-28 |
 | handoff | overlay | compact a session into a brief-mcp handoff | overlay | 2026-08-28 |
-| resume | overlay | resume work from a brief-mcp handoff | overlay | 2026-08-28 |
+| resume | overlay | sweep briefs/tasks/notes/wiki, pick a thread or start fresh | overlay | 2026-08-29 |
 | postmortem | utility | write an incident postmortem | utility | 2026-08-28 |
 | prototype-ui | utility | throwaway UI variants for a look-and-feel call | utility | 2026-08-28 |
 | prune | utility | condense docs + sweep the skill registry | utility | 2026-08-28 |
 | forge | utility | adversarial idea→skill assessor (fold / add / drop + rating) | utility | 2026-08-29 |
 | bug-echo | utility | after a fix, hunt structural twins of the bug, ranked | utility (post-fix) | 2026-08-29 |
+| distill | utility | compress material to what a skim misses + 3-4 lead points | utility | 2026-08-29 |
 | teachme | utility | closing concept-retro for a session | utility | 2026-08-28 |
 | tldr | utility | add a glance-readable TLDR to a markdown file | utility | 2026-08-28 |
 | yt-notes | utility | structured notes from a YouTube video | utility | 2026-08-28 |
