@@ -12,4 +12,4 @@ Plan 001 predates this directory and lives at `docs/plans/001-skill-pipeline-fra
 | # | Title | Status | Notes |
 |---|-------|--------|-------|
 | 002 | forge — assess skill ideas | implemented | Adversarial idea→skill assessor; utility skill |
-| 003 | cross-store-search — one fuzzy search endpoint over tasks/notes/briefs/wiki | spec accepted | `search_all` in mcp-erp; plan pending |
+| 003 | cross-store-search — one fuzzy search endpoint over tasks/notes/briefs/wiki | implemented | `search_all` in mcp-erp; spans erp + devkit + server-scripts + /resume |
