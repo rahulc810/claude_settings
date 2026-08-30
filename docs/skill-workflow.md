@@ -78,3 +78,10 @@ agent `skeptic`
 - **`forge`** — explicit, when `docs/skill-ideas/` has accumulated, or pointed at an
   external skill set to assess it. It is `notice`'s downstream.
 - **`notice`** — no trigger, just habit.
+
+## Reading long markdown
+
+`scripts/mdreader.html` — open it in a browser, drag a folder onto the window (or click
+**Open folder**). Folder tree left, one slide at a time in the middle, section outline
+right; `←` `→` to page, `Alt+←` to go back. It reads the markdown live off disk, so it is
+never stale, and it is coupled to nothing — any folder works. See `specs/004-md-navigation/`.

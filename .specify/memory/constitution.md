@@ -1,7 +1,7 @@
 # Constitution
 
 The pipeline's always-on rules. Every core skill reads this file as its first
-Procedure step. Keep it under 60 lines — it loads on every skill run.
+Procedure step. Keep it under 70 lines — it loads on every skill run.
 
 ## Artifact ledger
 
@@ -48,6 +48,17 @@ A skill needing a human decision writes `specs/NNN-<slug>/gates/NNN-<gate>.md`
 (`status: awaiting-input`) and stops. It resumes on `status: answered`, acts on
 `response:`, then sets `consumed`. Interactive skills (designit, plan-doc, grill) get
 the answer in-session; long-running skills (implement, resolve-review) actually park.
+
+## Document shape
+
+Any artifact over ~150 lines opens with a `## Map` — its own headings, in order, with
+line counts, so a reader can choose where to enter. Regenerate it when you restructure
+the doc. Place it after frontmatter and title, below `## TLDR` where one exists.
+
+Prefer a diagram to a paragraph where the content is a structure — a dependency order, a
+data flow, a state machine. One ```mermaid block near the top, not per section. Prose
+that enumerates relationships ("depends on step 3", "then calls X") is a diagram written
+the long way.
 
 ## Hard rules
 
