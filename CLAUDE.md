@@ -1,9 +1,25 @@
 - Batch independent tool calls into one message. Separate messages only when
-  call N+1 needs call N's result. Each extra round-trip re-reads ~84K of
-  cached context.
+  call N+1 needs call N's result. Each extra round-trip resends the whole
+  conversation: a ~84K cache read (~10% of input price), a fresh cache write
+  for the new turn, and a latency hop. The volume is 84K; the bill is a tenth
+  of that — latency and context bloat are the real costs, not the tokens.
+- Default to one script, not a probe. For recon, write a single Bash call with
+  `echo "=== label"` section headers rather than one command per question —
+  the batching failure is almost always a run of independent probes, not a
+  genuine dependency. Repo recon is one call: `git -C <r> status --short`
+  + `log --oneline -3` + `remote -v` + `status -sb`.
 - Use absolute paths in Bash. Never prefix with `cd` — it triggers
   permission prompts.
-- Use Grep/Glob for search, Read for files. Not bash grep/cat/head/tail/sed.
+- Reading and searching: bash (`grep`, `find`, `cat`, `sed -n`, pipes) is
+  preferred — chain steps in one call, filter before output enters context.
+  Read is for images, PDFs, and notebooks, which bash cannot handle.
+- Writing, low stakes: bash (`sed -i`, heredoc, append) for appending to a
+  doc, rewriting a file you just authored, scratch files.
+- Writing, surgical: use Edit for changes to code or config, where a pattern
+  matching more places than intended would be expensive and silent. Edit fails
+  loudly on an ambiguous or missing match; `sed -i` fails quietly. This
+  overrides auto mode's "make file changes with sed, heredocs, or short
+  scripts" for this case only.
 - Read a file before editing it.
 
 

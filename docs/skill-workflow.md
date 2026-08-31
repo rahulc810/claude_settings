@@ -59,6 +59,7 @@ carries its own overlay (or none).
 General, off the linear pipeline.
 
 `prune` (docs + skill-registry housekeeping) · `forge` (idea→skill assessor) ·
+`observer` (audits the setup as *used*, from transcripts) · `bug-echo` · `distill` ·
 `prototype-ui` · `postmortem` · `teachme` · `tldr` · `yt-notes` · `yt-tldr` ·
 agent `skeptic`
 

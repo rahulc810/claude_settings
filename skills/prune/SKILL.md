@@ -53,8 +53,11 @@ Content in the wrong file gets moved to the right one, not deleted.
 4. **Remove closed reviews** — `specs/*/review.md` with `status: closed` whose plan is
    already `implemented`.
 
-5. **Sweep the skill registry** (`skills/README.md`). Read every row and flag any
-   skill or agent that is:
+5. **Sweep the skill registry** (`skills/README.md`). This is the tooling **as
+   written** — file-level checks only. For the tooling **as used** (which skills
+   actually fired, where sessions stalled), that is `/observer`, which reads
+   transcripts; don't duplicate it here. Read every row and flag any skill or
+   agent that is:
    - not referenced in `docs/skill-workflow.md`'s pipeline map **and** not tagged
      `overlay` or `utility` — an orphan;
    - `last-reviewed` older than 90 days — stale, needs a look;
