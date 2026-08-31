@@ -14,7 +14,8 @@ may re-derive it.
 
 - Starting substantive work on a system that has history — invoked explicitly, since the
   sweep costs a round-trip.
-- Continuing from a handoff brief (the original use; still the default with no argument).
+- Continuing from a handoff brief (the original use; still the default with no argument) —
+  no sweep, just the most recent brief.
 - Skip for a self-contained one-off, or a topic that plainly has no prior work.
 
 ## Procedure
@@ -23,8 +24,11 @@ may re-derive it.
    search terms: the system or host name, the component, the problem word. `search_all`
    matching is typo- and word-order-tolerant but **not** synonym-aware, so include the
    obvious synonym — `dnsmasq` and `DHCP` are still two terms, not one (synonym
-   expansion is deferred, erp task #167). With no argument and no topic, skip to step 2
-   and take the most recent brief.
+   expansion is deferred, erp task #167).
+
+   **No-argument path** — with no topic, skip the sweep entirely: `get_brief` the most
+   recent brief, confirm the pick-up in one line (step 6), and continue from its next
+   step. Steps 2–5 are the topic-search path only.
 
 2. **Sweep** — one `search_all(query, limit=15)` call. It spans briefs, erp tasks, erp
    notes and the wiki, and returns ranked shortlist rows (never full bodies); each row's
@@ -58,7 +62,8 @@ may re-derive it.
 
 ## Done criteria
 
-- `search_all` swept, results deduped by thread.
+- `search_all` swept and deduped by thread (topic mode), or the most recent brief taken
+  directly (no-argument mode).
 - A shortlist presented and a thread picked, or "nothing relevant / starting fresh"
   stated explicitly.
 - The next action confirmed in one line before work begins.

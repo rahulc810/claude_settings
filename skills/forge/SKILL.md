@@ -1,7 +1,7 @@
 ---
 name: forge
 description: Take raw idea notes and adversarially decide whether each should become a skill — fold into an existing one, add as new, or drop — with an in-principle rating. Trigger on:- forge, assess skill ideas, review skill-ideas, should this be a skill, model a skill from an idea.
-argument-hint: "dir to scan (default docs/skill-ideas/)"
+argument-hint: "dir to scan (default docs/skill-ideas/), or prose describing a revision to an existing skill"
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash
 disable-model-invocation: true
 model: claude-opus-5
@@ -17,17 +17,25 @@ a rating. This is `notice`'s "Reviewing" step, done properly instead of skipped.
 
 - `docs/skill-ideas/` has accumulated candidates and you want them triaged.
 - Pointed at someone else's skill directory to assess that set.
-- Skip for a one-line tweak to an existing skill — just make it.
+- **Revision mode** — a prose argument (not a scan dir) naming a change to what an
+  existing skill *does*: its procedure, triggers, tools, or a mis-calibration surfaced
+  by `/notice`. No new idea file needed — skill management is the point.
+- Skip only for a pure wording fix to an existing skill — just make it.
 
 ## Procedure
 
 1. **Read `.specify/memory/constitution.md` and `skills/README.md`** (the authoring
    standard, the registry, and the **Overlap check**).
 
-2. **Resolve the scan dir** — the argument, else `docs/skill-ideas/`. `Glob` `*.md`
-   (non-recursive; the `_` dirs are skipped). Note whether this is **local mode**
-   (`docs/skill-ideas/`) or **external mode** (any other path). Process each file in
-   order:
+2. **Resolve the input** — if the argument is prose describing a change to an existing
+   skill rather than a path, this is **revision mode**: skip the scan. Model the target
+   skill as it stands and the proposed change, run steps 3–5 on *the change* (does it
+   earn its place in that skill, should it fold into a different one, does it bloat an
+   always-loaded `description`), write the report section (step 7), and on confirm apply
+   the `Edit` directly — no idea file to archive. Otherwise, scan: the argument as a
+   dir, else `docs/skill-ideas/`. `Glob` `*.md` (non-recursive; the `_` dirs are
+   skipped). Note whether this is **local mode** (`docs/skill-ideas/`) or **external
+   mode** (any other path). Process each file in order:
 
 3. **Proposer pass** — model the strongest skill the idea implies: name, one-line
    purpose, trigger phrases, the procedure it would run, the artifact or outcome it
