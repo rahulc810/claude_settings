@@ -154,11 +154,10 @@
   "enabledPlugins": {
     "playwright@claude-plugins-official": true
   },
-  attribution: {
-      sessionUrl: false,
-      commit: "",
-      pr: ""
-    }
+  "attribution": {
+    "sessionUrl": false,
+    "commit": "",
+    "pr": ""
   },
   "outputStyle": "Concise",
   "effortLevel": "medium",
